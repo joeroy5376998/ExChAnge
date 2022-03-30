@@ -1,5 +1,10 @@
 # ExChAnge
 The Website for Exchanging Items
+## 專案結構
+1. images: 存放所有網頁會用到的圖片檔
+2. scripts: js檔案
+3. styles: css檔案
+4. templates: html檔案
 ## Git 操作
 ### 複製專案到 local
 Local 端還沒有這個專案時，可執行 clone 取得 github 上面的程式碼。
