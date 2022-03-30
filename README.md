@@ -14,9 +14,10 @@ Local 端修改完程式碼後，要上傳到 github 的步驟：
 git pull --rebase origin main
 ```
 2. 暫存 local 端目前的版本
+記得要回到整個專案的資料夾最上層，才能把所有有更動的地方加入
 ```command line
 git add .
-git commit -m "敘述這次修改部分" # 用英文，盡量讓大家看得懂
+git commit -m "敘述這次修改部分" #用英文，盡量讓大家看得懂
 ```
 3. Push 上 Github
 ```command line
