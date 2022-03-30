@@ -6,3 +6,4 @@ Local 端還沒有這個專案時，可執行 clone 取得 github 上面的程�
 ```command line
 git clone https://github.com/joeroy5376998/ExChAnge.git
 ```
+### 在 local 端改完程式碼要上傳到 github 的步驟
