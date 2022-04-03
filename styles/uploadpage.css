@@ -1,0 +1,35 @@
+body{
+    background-color: #34495e;
+}
+
+.content{
+    position:fixed; 
+    left:50px;
+    top:50px;
+    width: 300px;
+    font-family:Marker Felt;
+    color:white;
+}
+
+.line{
+    position:fixed; 
+    width: 1800px;
+    top:100px;
+}
+
+.u{
+    position:fixed;
+    left:50px; 
+    top:150px;
+    color:rgb(255, 255, 255);
+}
+
+.text{
+    position:fixed;
+    left:50px;
+    top:250px;
+}
+
+.text p{
+    color:white;
+}
