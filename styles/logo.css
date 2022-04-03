@@ -2,17 +2,22 @@ body{
     background-color: #34495e;
 }
 
-.content{
-    position:fixed; 
+.logo_line{
+    position:relative;
+    top:20px;
+}
+
+.logo{
+    position:relative; 
     left:50px;
-    top:50px;
+    top:20px;
     width: 300px;
     font-family:Marker Felt;
     color:white;
 }
 
 .line{
-    position:fixed; 
+    position:relative; 
     width: 1800px;
-    top:100px;
+    top:0px;
 }
