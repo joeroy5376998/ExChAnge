@@ -13,7 +13,7 @@
     --btn-click: #c2c1a5;
 }
 
-.container {
+body {
     position: fixed;
     background-color: var(--bg-1);
     top: 0;
@@ -75,7 +75,7 @@ img {
     height: 200px;
 }
 
-.container .btn {
+.btn {
     position: relative;
     background-color: var(--btn);
     height: 2em;
