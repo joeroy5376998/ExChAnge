@@ -1,0 +1,8 @@
+div#body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  div div {
+    margin: 5vh;
+  }
+}

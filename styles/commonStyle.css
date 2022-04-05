@@ -45,35 +45,6 @@
   top: 20%;
 }
 
-#homepage {
-  display: block;
-  height: 500px;
-  overflow: scroll;
-}
-
-#about #backpack {
-  display: none;
-}
-
-.item {
-  position: relative;
-  display: inline-block;
-  text-align: center;
-  margin: 30px 30px;
-  top: 30px;
-  left: 100px;
-}
-
-img {
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.item_img {
-  width: 200px;
-  height: 200px;
-}
-
 .btn {
   position: relative;
   background-color: var(--btn);
@@ -96,4 +67,4 @@ img {
   border: none;
   color: white;
 }
-/*# sourceMappingURL=homepage.css.map */
+/*# sourceMappingURL=commonStyle.css.map */

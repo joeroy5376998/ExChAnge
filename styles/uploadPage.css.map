@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,AAAA,KAAK,CAAC;EACP,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,MAAM;CAIpB;;AAPD,AAIE,GAJC,AAAA,KAAK,CAIN,GAAG,CAAC,GAAG,CAAC;EACN,MAAM,EAAE,GAAG;CACZ",
+    "sources": [
+        "uploadPage.scss"
+    ],
+    "names": [],
+    "file": "uploadPage.css"
+}

@@ -62,7 +62,7 @@ body {
 .btn:hover {
   background-color: var(--btn-click);
   border: none;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 #to_register {
@@ -81,20 +81,12 @@ body {
 }
 
 div#body div {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
+  //   justify-content: center;
+  label,
+  button {
+    margin: 1.25vh;
+  }
 }
-
-div#body div label,
-div#body div button {
-  margin: 1.25vh;
-}
-/*# sourceMappingURL=login.css.map */
