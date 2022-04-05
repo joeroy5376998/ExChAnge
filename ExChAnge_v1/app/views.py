@@ -9,7 +9,7 @@ from .models import User, Item
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/')
+@app.route('/homepage')
 def index():
     return render_template('homepage.html')
 
@@ -19,8 +19,9 @@ def about():
 
 @app.route('/bag')
 def bag():
-    return render_template('bag.html')
+    return render_template('backpack.html')
 
+@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
