@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+<link href="{{url_for('.static', filename='/styles/login.css')}}" rel="stylesheet" >
+{% endblock %}
+
+{% block content %}
+<div id="body">
+    <div class="input_container" id="register">
+        <form class="form-signin" method="POST" action="/signup">
+            {{ form.csrf_token }}
+            <p>{{ wtf.form_field(form.account) }}</p>
+            <p>{{ wtf.form_field(form.password) }}</p>
+            <p>{{ wtf.form_field(form.comfirm) }}</p>
+            <p>{{get_flashed_messages()[-1]}}</p>
+            <button class="button" id="btn_login" type="submit" value="register">註冊</button><br/>
+        </form>
+    </div>
+</div>
+{% endblock %}

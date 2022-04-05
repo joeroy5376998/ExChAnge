@@ -6,14 +6,14 @@
 }
 
 :root {
-    --bg-1: #ffffff;
+    --bg-1: #f4eee2;
     --bg-2: #f3eee1;
     --text: #393e41;
     --btn: #e7e5df;
     --btn-click: #c2c1a5;
 }
 
-#body {
+body {
     position: fixed;
     background-color: var(--bg-1);
     top: 0;
@@ -47,9 +47,10 @@
 }
 
 #homepage {
+    overflow-x: hidden;
+    overflow-y: hidden;
     display: block;
     height: 500px;
-    overflow: scroll;
 }
 
 #about #backpack{
@@ -97,4 +98,3 @@ img {
     border: none;
     color: rgb(255, 255, 255);
 }
-
