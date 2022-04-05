@@ -1,23 +1,24 @@
-body{
+body {
     background-color: #34495e;
 }
 
-.logo_line{
-    position:relative;
-    top:20px;
+.logo_line {
+    position: relative;
+    top: 20px;
 }
 
-.logo{
-    position:relative; 
-    left:50px;
-    top:20px;
+
+.logo {
+    position: relative;
+    left: 50px;
+    top: 20px;
     width: 300px;
-    font-family:Marker Felt;
-    color:white;
+    font-family: Marker Felt;
+    color: white;
 }
 
-.line{
-    position:relative; 
+.line {
+    position: relative;
     width: 1800px;
-    top:0px;
+    top: 0px;
 }
