@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>ExChAnge</title>
-        <link href="{{url_for('.static', filename='/styles/homepage.css')}}" rel="stylesheet" type="text/css">
         {% block styles %}
         {% endblock %}
+        <link href="{{url_for('.static', filename='/styles/commonStyle.css')}}" rel="stylesheet" type="text/css">
+        {% if request.path != "/login" and  request.path != "/signup" and  request.path != "/" %} 
+        <title>ExChAnge</title>
+        {% else %}
+        <title>Login</title>
+        {% endif %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        
     </head>
     <body>
-        <h1 id="title">ExChAnge</h1>
-        <div id="list">
-            <button class="btn" id="btn_home" onclick="location.href='/';">首頁</button>
-            <button class="btn" id="btn_about" onclick="location.href='/about';">關於我們</button>
-            {% if current_user.is_authenticated %}
+        <header>
+            <div class="header">
+              <h1 id="title">ExChAnge</h1>
+            </div>
+
+            {% if request.path != "/login" and  request.path != "/signup" and  request.path != "/" %} 
+            <nav>
+              <button class="btn" onclick="location.href='/homepage';" id="btn_home">
+                首頁
+              </button>
+
+              <button class="btn" onclick="location.href='/about';" id="btn_about">
+                關於我們
+              </button>
+
+              {% if current_user.is_authenticated %}
                 <button class="btn" id="btn_backpack" onclick="location.href='/bag';">我的背包</button>
                 <button class="btn" id="btn_login" onclick="location.href='/logout';">登出</button>
-            {% else %}
+              {% else %}
                 <button class="btn" id="btn_login" onclick="location.href='/login';">登入</button>
-            {% endif %}
-        </div>
+              {% endif %}
+
+            </nav>
+            {% endif %} 
+        </header>
+
         {% block content %}
         {% endblock %}
     </body>
