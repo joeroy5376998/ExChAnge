@@ -9,7 +9,6 @@ class User(UserMixin, db.Model):
 class Item(db.Model):
     item_id = db.Column(db.Integer, primary_key=True)
     item_name = db.Column(db.String(15))
-    item_descr = db.Column(db.String(50))
     item_pic_path = db.Column(db.LargeBinary)
     item_status = db.Column(db.Integer())
     item_owner_id = db.Column(db.Integer())

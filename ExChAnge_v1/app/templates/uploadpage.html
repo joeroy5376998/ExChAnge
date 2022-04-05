@@ -1,33 +1,23 @@
-<html>
-    <head>
-        <title>Upload Page</title>
-        <link rel = "stylesheet" href = "uploadpage.css" />
-    </head>
-    <body>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
-        <div class = "logo_line">
-            <div class = "logo">
-                <h1>ExChAnge</h1> <!--font size-->
-            </div>
-            <div class = "line">
-                <HR width="100%" SIZE=1>
-            </div>
-        </div>
+{% block styles %}
+<link href="{{url_for('.static', filename='/styles/form.css')}}" rel="stylesheet" >
+{% endblock %}
 
-
-        <div class = "imgtext">
-            <div class = "image">
-                <p>Upload image:</p>
-                <input name="img" type="file" accept="image/gif, image/jpeg, image/png"> 
-                </form>
-            </div>
-            <div class = "text">
-                <p>Description of this item:</p>
-                <input name="description" type="text">
-                <input type="submit" value="submit">
-            </div>
-        </div>
-        
-        <!--<script>window.alert("成交通知");</script>-->
-    </body>
-</html>
+{% block content %}
+<div id="body">
+  <div class="input_container">
+    <form class="form-upload-item" method="POST" action="/upload">
+      {{ form.csrf_token }}
+      <div>
+        <h2>上傳圖片</h2>
+        {{ wtf.form_field(form.image) }}
+        <h2>商品描述</h2>
+        {{ wtf.form_field(form.name) }}
+        <button class="button" id="btn_upload" type="submit" value="upload">送出</button><br/>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
