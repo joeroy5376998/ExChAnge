@@ -1,9 +1,10 @@
 from app import app
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
 from flask_wtf import FlaskForm
-from flask_bootstrap import Bootstrap
-from wtforms import StringField, PasswordField, BooleanField
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import StringField, PasswordField
 from wtforms.validators import InputRequired, Length, EqualTo
 
 # Login Forms
@@ -17,8 +18,8 @@ class RegisterForm(FlaskForm):
     comfirm = PasswordField('確認密碼', validators=[InputRequired(), Length(min=8, max=80), EqualTo('password', message='密碼不一樣啦!')])
 
 class ItemForm(FlaskForm):
-    name = StringField('Item Name', validators=[InputRequired(), Length(min=1, max=15)])
-    descr = StringField('Item Description', validators=[InputRequired(), Length(min=1, max=50)])
+    name = StringField('', validators=[InputRequired(), Length(min=1, max=15)])
+    image = FileField('', validators=[FileRequired(), FileAllowed(['jpg', 'png'], '只能傳圖片啦!')])
 
 # Database
 db = SQLAlchemy(app)

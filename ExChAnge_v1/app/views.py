@@ -13,32 +13,22 @@ def load_user(user_id):
 def index():
     return render_template('homepage.html')
 
+@app.route('/about')
+def about():
+    return render_template('aboutUs.html')
+
 @app.route('/bag')
 def bag():
     return render_template('bag.html')
-    
-"""
-@app.route('/upload', methods=['GET', 'POST'])
-@login_required
-def upload():
-    form = ItemForm()
-    if form.validate_on_submit():
-        new_item = Item(item_name=form.name.data, item_descr=form.descr.data, item_owner_id=current_user.id)
-        db.session.add(new_item)
-        db.session.commit()
-        return redirect(url_for("dashboard"))
-
-    return render_template('upload.html', form=form)
-"""
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-
     if form.validate_on_submit():
         user = User.query.filter_by(user_account=form.account.data).first()
         if user:
             if check_password_hash(user.user_password, form.password.data):
+                logout_user()
                 login_user(user)
                 return redirect(url_for('bag'))
             
@@ -69,4 +59,14 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
+@app.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload():
+    form = ItemForm()
+    if form.validate_on_submit():
+        new_item = Item(item_name=form.name.data, item_owner_id=current_user.id)
+        db.session.add(new_item)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
 
+    return render_template('uploadpage.html', form=form)
