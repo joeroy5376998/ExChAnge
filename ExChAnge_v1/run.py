@@ -1,8 +1,9 @@
 from app import app
 from app.extensions import db
 import json
+import os
 
-with open('config.json') as config_file:
+with open(os.path.dirname(os.path.abspath(__file__))+'/config.json') as config_file:
     config = json.load(config_file)
     host = config['host']
     port = config['port']
