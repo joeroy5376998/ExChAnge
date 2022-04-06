@@ -20,6 +20,9 @@
         <p >{{form.comfirm(class="form-control form-control-lg") }} </p><br /> </label
         ><br />
         <p>{{get_flashed_messages()[-1]}}</p>
+        {% for field, errors in form.errors.items() %}
+        <p>{{errors[0]}}</p>
+        {% endfor %}
         <div><button class="btn" id="btn_login" type="submit" value="register">註冊</button><br/></div><br /> 
       </form>
       <button id="to_login"  onclick="location.href='/login';">直接登入已有帳戶</button>
