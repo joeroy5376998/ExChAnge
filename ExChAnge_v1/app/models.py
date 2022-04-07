@@ -17,4 +17,9 @@ class Item(db.Model):
 class Post(db.Model):
     post_id = db.Column(db.Integer, primary_key=True)
     post_item_id = db.Column(db.Integer)
-    candidate_id = db.Column(db.Integer)
+
+class Candidate(db.Model):
+    candidate_id = db.Column(db.Integer, primary_key=True)
+    post_id = db.Column(db.Integer)
+    item_id = db.Column(db.Integer)
+    
