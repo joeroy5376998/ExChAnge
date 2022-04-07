@@ -15,7 +15,7 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     account = StringField('帳號', validators=[InputRequired(), Length(min=4, max=15)])
     password = PasswordField('密碼', validators=[InputRequired(), Length(min=8, max=80)])
-    comfirm = PasswordField('確認密碼', validators=[InputRequired(), Length(min=8, max=80), EqualTo('password', message='密碼不一樣啦!')])
+    confirm = PasswordField('確認密碼', validators=[InputRequired(), Length(min=8, max=80), EqualTo('password', message='密碼不一樣啦!')])
 
 class ItemForm(FlaskForm):
     name = StringField('', validators=[InputRequired(), Length(min=1, max=15)])

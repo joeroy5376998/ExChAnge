@@ -29,10 +29,10 @@
               </button>
 
               {% if current_user.is_authenticated %}
-                <button class="btn" id="btn_backpack" onclick="location.href='/bag';">我的背包</button>
-                <button class="btn" id="btn_login" onclick="location.href='/logout';">登出</button>
-            {% else %}
-                <button class="btn" id="btn_login" onclick="location.href='/login';">登入</button>
+              <button class="btn" id="btn_backpack" onclick="location.href='/bag';">我的背包</button>
+              <button class="btn" id="btn_login" onclick="location.href='/logout';">登出</button>
+              {% else %}
+              <button class="btn" id="btn_login" onclick="location.href='/login';">登入</button>
               {% endif %}
 
             </nav>
