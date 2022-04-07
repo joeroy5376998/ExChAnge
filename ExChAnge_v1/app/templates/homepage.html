@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="item">
+    <h1>最新商品</h1>
     <section>
       {% for item in post_items %}
       <div class="item">
@@ -13,8 +14,8 @@
             <input class="btn" type="submit" name="#" value="這是我的">
           </form>
           {% else %}
-          <form method="GET" action="">
-            <input class="btn" type="submit" name="#" value="我要交換">
+          <form method="GET" action="{{ url_for('get_post_id', post_id=item.item_post_id) }}">
+            <input class="btn" type="submit" name="select" value="我要交換">
           </form>
           {% endif %}
       </div>
