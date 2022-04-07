@@ -2,34 +2,35 @@
 
 {% block content %}
 <div class="item">
-    <!-- 商品列表 -->
-    <section>
-      {% if bag.count() == 0  %}
-      <p>你的背包是空的! 按擴充背包來新增物品!</p>
-      {% else %}
-      {% for item in bag %}
-      <div class="item">
-        <img class="item_img" src="{{url_for('.static', filename='/uploads/'+item.item_pic_filename)}}">
-        <p class="item_name">{{ item.item_name }}</p>
-        <form method="GET" action="{{ url_for('delete_item', item_id=item.item_id) }}">
-            <input class="btn" type="submit" name="delete" value="刪除">
-        </form>
-        {% if item.item_status == 0 %}
-        <form method="GET" action="{{ url_for('post_item', item_id=item.item_id) }}">
-            <input class="btn" type="submit" name="post" value="上架">
-        </form>
-        {% elif item.item_status == 1 %}
-        <form method="GET" action="{{ url_for('unpost_item', item_id=item.item_id) }}">
-          <input class="btn" type="submit" name="unpost" value="下架">
-        </form>
-        {% endif %}
-      </div>
-      {% endfor %}
+  <button class="btn" onclick="location.href='/upload_item';">
+    擴充背包
+  </button>
+  <!-- 商品列表 -->
+  <section>
+    {% if bag.count() == 0  %}
+    <p>你的背包是空的! 按擴充背包來新增物品!</p>
+    {% else %}
+    {% for item in bag %}
+    <div class="item">
+      <img class="item_img" src="{{url_for('.static', filename='/uploads/'+item.item_pic_filename)}}">
+      <p class="item_name">{{ item.item_name }}</p>
+      {% if item.item_status == 0 %}
+      <form method="GET" action="{{ url_for('post_item', item_id=item.item_id) }}">
+          <input class="btn" type="submit" name="post" value="上架">
+      </form>
+      <form method="GET" action="{{ url_for('delete_item', item_id=item.item_id) }}">
+        <input class="btn" type="submit" name="delete" value="刪除">
+      </form>
+      {% elif item.item_status == 1 %}
+      <form method="GET" action="{{ url_for('unpost_item', item_id=item.item_id) }}">
+        <input class="btn" type="submit" name="unpost" value="下架">
+      </form>
+      {% elif item.item_status == 2 %}
+      <input class="btn" type="submit" name="uncandidate" value="交易中">
       {% endif %}
-    </section>
-    <button class="btn" onclick="location.href='/upload_item';">
-      擴充背包
-    </button>
-  </div>
-
+    </div>
+    {% endfor %}
+    {% endif %}
+  </section>
+</div>
 {% endblock %}
