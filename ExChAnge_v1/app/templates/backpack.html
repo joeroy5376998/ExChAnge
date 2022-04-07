@@ -21,7 +21,8 @@
       </form>
       {% elif item.item_status == 1 %}
       <form method="GET" action="{{ url_for('unpost_item', item_id=item.item_id) }}">
-        <input class="btn" type="submit" name="unpost" value="下架">
+        <input class="btn" type="submit" name="unpost" value="結標">
+        <!-- 按下結標要跳到 exchange.html-->
       </form>
       {% elif item.item_status == 2 %}
       <input class="btn" type="submit" name="uncandidate" value="交易中">

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+<script>
+    function notify (){
+        alert("結標！背包與鯊鯊交換成功！")
+    }
+</script>
+
+{% block content %}
+<div class="item">
+    <h1>結標，請從下方選取欲交換的物品</h1>
+    <section>
+        <!-- 顯示 candidate item -->
+        <div class="item">
+            <img class="item_img" src="../static/images/backpack.png">
+            <p class="item_name">背包</p>
+            <button onclick="notify()" class="btn">交換此物品</button>
+        </div>
+    </section>
+</div>
+
+{% endblock %}
