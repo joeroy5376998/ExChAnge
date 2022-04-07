@@ -2,10 +2,8 @@
 
 {% block content %}
 <div class="item">
-  <button class="btn" onclick="location.href='/upload_item';">
-    擴充背包
-  </button>
   <!-- 商品列表 -->
+  <h1>我的背包</h1>
   <section>
     {% if bag.count() == 0  %}
     <p>你的背包是空的! 按擴充背包來新增物品!</p>
@@ -32,5 +30,8 @@
     {% endfor %}
     {% endif %}
   </section>
+  <button class="btn" onclick="location.href='/upload_item';">
+    擴充背包
+  </button>
 </div>
 {% endblock %}
