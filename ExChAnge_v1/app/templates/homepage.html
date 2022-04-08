@@ -9,14 +9,16 @@
       <div class="item">
           <img class="item_img" src="{{url_for('.static', filename='/uploads/'+item.item_pic_filename)}}">
           <p class="item_name">{{ item.item_name }}</p>
+          {% if current_user.is_authenticated %}
           {% if item.item_owner_id == current_user.id %}
-          <form method="GET" action="">
-            <input class="btn" type="submit" name="#" value="這是我的">
-          </form>
+          <input class="btn" type="submit" name="mine" value="這是我的">
           {% else %}
-          <form method="GET" action="{{ url_for('get_post_id', post_id=item.item_post_id) }}">
+          <form method="GET" action="{{ url_for('get_post_id', post_id=item.item_post_id, page='sel_bag') }}">
             <input class="btn" type="submit" name="select" value="我要交換">
           </form>
+          {% endif %}
+          {% else %}
+          <button class="btn" onclick="location.href='/select_bag_item';" type="submit" name="select">我要交換</button>     
           {% endif %}
       </div>
       {% endfor %}
