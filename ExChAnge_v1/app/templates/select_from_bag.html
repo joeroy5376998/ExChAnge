@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="item">
+  <h1>我的背包</h1>
   <!-- 商品列表 -->
   <section>
     {% if bag.count() == 0  %}
@@ -11,7 +12,7 @@
     <div class="item">
       <img class="item_img" src="{{url_for('.static', filename='/uploads/'+item.item_pic_filename)}}">
       <p class="item_name">{{ item.item_name }}</p>
-      <form method="GET" action="{{ url_for('exchange', item_id=item.item_id) }}">
+      <form method="GET" action="{{ url_for('add_candidate', item_id=item.item_id, post_id=post_id) }}">
           <input class="btn" type="submit" name="select" value="選我">
       </form>
     </div>
