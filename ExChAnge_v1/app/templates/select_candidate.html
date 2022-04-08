@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+<script>
+    function notify (){
+        alert("結標！交換成功！")
+    }
+</script>
+
+{% block content %}
+<div class="item">
+    <h1>結標，請從下方選取欲交換的物品</h1>
+    <section>
+        <!-- 顯示 candidate item -->
+        {% for item in bag %}
+        <div class="item">
+            <img class="item_img" src="{{url_for('.static', filename='/uploads/'+item.item_pic_filename)}}">
+            <p class="item_name">{{ item.item_name }}</p>
+            <form method="GET" action="{{ url_for('exchange', item_id=item.item_id, post_id=post_id) }}">
+                <input class="btn" type="submit" name="select" value="交換此物品">
+            </form>
+        </div>
+        {% endfor %}
+        <!--<button onclick="notify()" class="btn">交換此物品</button>
+    </section>
+</div>
+
+{% endblock %}

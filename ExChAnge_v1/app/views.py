@@ -1,7 +1,7 @@
 import os
 import uuid
 from app import app
-from flask import render_template, redirect, url_for, flash, session
+from flask import render_template, redirect, request, url_for, flash, session
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -12,7 +12,7 @@ from .models import User, Item, Post, Candidate
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-@app.route('/homepage')
+@app.route('/')
 def index():
     items_list = []
     post_items = Post.query.all()
@@ -26,7 +26,6 @@ def index():
 def about():
     return render_template('aboutUs.html')
 
-@app.route('/')
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -36,6 +35,7 @@ def login():
             if check_password_hash(user.user_password, form.password.data):
                 logout_user()
                 login_user(user)
+                session['user_account'] = current_user.user_account
                 return redirect(url_for('bag'))
             
         flash("帳密錯誤!", "info")
@@ -85,7 +85,7 @@ def upload_item():
                         item_pic_filename=f"{str(rand)}_{filename}", item_status=0)
         db.session.add(new_item)
         db.session.commit()
-        return redirect(url_for("bag"))
+        return redirect(url_for('bag'))
 
     return render_template('uploadpage.html', form=form)
 
@@ -94,25 +94,10 @@ def upload_item():
 def delete_item(item_id):
     item = Item.query.filter_by(item_id=item_id).first()
     if item != None and current_user.id == item.item_owner_id:
-        """
-        # If item is posted, set its candidate's status back to 0: no_status
-        candidate_items_id = [candidate.item_id for candidate in Candidate.query.filter_by(post_id=item.item_post_id)]
-        for id in candidate_items_id :
-            candidate_item = Item.query.filter_by(item_id=id).first()
-            candidate_item.item_status = 0
-
-        # If item is posted, remove candidates of this item from the candidate table
-        Candidate.query.filter_by(post_id=item.item_post_id).delete()
-        # If item is a candidate, remove entry from candidate table
-        Candidate.query.filter_by(item_id=item.item_id).delete()
-        # If item is posted, remove post entry from post table
-        Post.query.filter_by(post_item_id=item_id).delete()
-        """
         # Remove entry from bag table, remove photo from os directory
         path = os.path.join(app.root_path,'static', 'uploads', item.item_pic_filename)
         os.remove(path)
         db.session.delete(item)
-
         db.session.commit()
 
     return redirect(url_for('bag'))
@@ -135,6 +120,72 @@ def post_item(item_id):
 
     return redirect(url_for("bag"))
 
+@app.route('/get_post_id/<int:post_id>/<string:page>', methods=['GET', 'POST'])
+@login_required
+def get_post_id(post_id, page):
+    if page == 'sel_bag':
+        return redirect(url_for("select_bag_item", post_id=post_id))
+    else :
+        return redirect(url_for("select_candidate", post_id=post_id))
+
+@app.route('/select_bag_item', methods=['GET', 'POST'])
+@login_required
+def select_bag_item():
+    items = Item.query.filter_by(item_owner_id=current_user.id, item_status=0)
+    return render_template('select_from_bag.html', bag=items, post_id=request.args['post_id'])
+
+@app.route('/add_candidate/<int:item_id>/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def add_candidate(item_id, post_id):
+    item = Item.query.filter_by(item_id=item_id).first()
+    if item.item_status == 0 and item.item_owner_id == current_user.id:
+        new_candidate = Candidate(post_id=post_id, item_id=item_id)
+        # Change status of item to 2: candidated
+        item.item_status = 2
+        db.session.add(new_candidate)
+        db.session.commit()
+
+    return redirect(url_for("index"))
+
+@app.route('/select_candidate', methods=['GET', 'POST'])
+@login_required
+def select_candidate():
+    candidate_items_id = [candidate.item_id for candidate in Candidate.query.filter_by(post_id=request.args['post_id'])]
+    items = []
+    for id in candidate_items_id:
+        items.append(Item.query.filter_by(item_id=id).first())
+
+    return render_template('select_candidate.html', bag=items, post_id=request.args['post_id'])
+
+@app.route('/exchange/<int:item_id>/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def exchange(item_id, post_id):
+    item = Item.query.filter_by(item_post_id=post_id).first()
+    if item.item_owner_id == current_user.id:
+        # Set its candidate's status back to 0: no_status or 3: completed
+        candidate_items_id = [candidate.item_id for candidate in Candidate.query.filter_by(post_id=item.item_post_id)]
+        for id in candidate_items_id :
+            candidate_item = Item.query.filter_by(item_id=id).first()
+            if candidate_item.item_id == item_id :
+                candidate_item.item_status = 3
+            else:
+                candidate_item.item_status = 0
+
+            # Remove candidates of this item from the candidate table
+            Candidate.query.filter_by(post_id=item.item_post_id).delete()
+            # Remove post entry from post table
+            Post.query.filter_by(post_item_id=item.item_id).delete()
+            # Change status of item to 0: no_status
+            item.item_status = 3
+            # Remove post id from item
+            item.item_post_id = None
+
+            flash("success")
+            db.session.commit()
+
+    return redirect(url_for('bag'))
+
+"""
 @app.route('/unpost_item/<int:item_id>', methods=['GET', 'POST'])
 @login_required
 def unpost_item(item_id):
@@ -158,28 +209,4 @@ def unpost_item(item_id):
         db.session.commit()
 
     return redirect(url_for("bag"))
-
-@app.route('/get_post_id/<int:post_id>', methods=['GET', 'POST'])
-@login_required
-def get_post_id(post_id):
-    session['post_id'] = post_id
-    return redirect(url_for("select_bag_item"))
-
-@app.route('/select_bag_item', methods=['GET', 'POST'])
-@login_required
-def select_bag_item():
-    items = Item.query.filter_by(item_owner_id=current_user.id, item_status=0)
-    return render_template('select_from_bag.html', bag=items)
-
-@app.route('/exchange/<int:item_id>', methods=['GET', 'POST'])
-@login_required
-def exchange(item_id):
-    item = Item.query.filter_by(item_id=item_id).first()
-    if item.item_status == 0 and item.item_owner_id == current_user.id:
-        new_candidate = Candidate(post_id=session['post_id'], item_id=item_id)
-        # Change status of item to 2: candidated
-        item.item_status = 2
-        db.session.add(new_candidate)
-        db.session.commit()
-
-    return redirect(url_for("index"))
+"""
