@@ -8,10 +8,11 @@
 
 :root {
   --bg-1: #ffffff;
-  --bg-2: #f3eee1;
-  --text: #393e41;
-  --btn: #e7e5df;
-  --btn-click: #c2c1a5;
+  --bg-2: #cdcdcd;
+  --text-1: #463f3a;
+  --text-2: #3587a4;
+  --btn: #f6f4f3;
+  --btn-click: #364156;
 }
 
 header {
@@ -20,7 +21,7 @@ header {
   height: 20vh;
   top: 0;
   z-index: 2;
-  background-color: white;
+  background-color: var(--bg-1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -32,14 +33,15 @@ header {
 }
 
 header h1 {
-  background-color: white;
+  background-color: var(--bg-1);
+  color: var(--text);
   font-family: "Comic Sans MS", "Papyrus";
   font-weight: bold;
   font-size: 50px;
 }
 
 header div.header {
-  background-color: white;
+  background-color: var(--bg-1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -53,7 +55,7 @@ header div.header {
 }
 
 header nav {
-  background-color: white;
+  background-color: var(--bg-1);
   margin-right: 1rem;
 }
 
@@ -63,12 +65,10 @@ header nav {
   height: 2em;
   width: 8em;
   margin: 10px 4px;
-  border-color: #596869;
-  border: 0.5px 0.5px;
   border-radius: 10px;
   text-align: center;
   font-size: 16px;
-  color: var(--text);
+  color: var(--text-1);
   display: inline-block;
   text-decoration: none;
   background-color: none;
@@ -77,7 +77,7 @@ header nav {
 .btn:hover {
   background-color: var(--btn-click);
   border: none;
-  color: white;
+  color: var(--bg-1);
 }
 
 div.item {
@@ -120,6 +120,9 @@ div.item section div {
 
 div.item section img {
   width: 20vw;
+  height: 20vw;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 div.uploadPage {

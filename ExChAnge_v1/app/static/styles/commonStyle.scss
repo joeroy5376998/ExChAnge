@@ -7,10 +7,11 @@
 
 :root {
   --bg-1: #ffffff;
-  --bg-2: #f3eee1;
-  --text: #393e41;
-  --btn: #e7e5df;
-  --btn-click: #c2c1a5;
+  --bg-2: #cdcdcd;
+  --text-1: #463f3a;
+  --text-2: #3587a4;
+  --btn: #f6f4f3;
+  --btn-click: #364156;
 }
 
 //導覽列
@@ -19,26 +20,26 @@ header {
   height: 20vh;
   top: 0;
   z-index: 2;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--bg-1);
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   h1 {
-    background-color: rgb(255, 255, 255);
-
+    background-color: var(--bg-1);
+    color: var(--text);
     font-family: "Comic Sans MS", "Papyrus";
     font-weight: bold;
     font-size: 50px;
   }
   div.header {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-1);
     display: flex;
     align-items: center;
     flex: 4 1 400px;
     margin-left: 1rem;
   }
   nav {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--bg-1);
     margin-right: 1rem;
   }
 }
@@ -49,20 +50,18 @@ header {
   background-color: var(--btn);
   height: 2em;
   width: 8em;
-  margin: 10px 4px;
-  border-color: #596869;
-  border: 0.5px 0.5px;
+  margin: 10px 4px;;
   border-radius: 10px;
   text-align: center;
   font-size: 16px;
-  color: var(--text);
+  color: var(--text-1);
   display: inline-block;
   text-decoration: none;
   background-color: none;
   &:hover {
     background-color: var(--btn-click);
     border: none;
-    color: rgb(255, 255, 255);
+    color: var(--bg-1);
   }
 }
 
@@ -85,6 +84,8 @@ div.item {
     }
     img {
       width: 20vw;
+      height: 20vw;
+      object-fit: contain;
     }
   }
 }
