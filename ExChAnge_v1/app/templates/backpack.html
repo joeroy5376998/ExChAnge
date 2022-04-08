@@ -30,11 +30,7 @@
         <!-- 按下結標要跳到 exchange.html-->
       </form>
       {% elif item.item_status == 2 %}
-      <input class="btn" type="submit" name="candidated" value="交易中">
-      {% elif item.item_status == 3 %}
-      <form method="GET" action="{{ url_for('delete_item', item_id=item.item_id) }}">
-        <input class="btn" type="submit" name="delete" value="交易完成">
-      </form>      
+      <input class="btn" type="submit" name="candidated" value="交易中">   
       {% endif %}
     </div>
     {% endfor %}

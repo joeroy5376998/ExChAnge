@@ -166,22 +166,24 @@ def exchange(item_id, post_id):
         candidate_items_id = [candidate.item_id for candidate in Candidate.query.filter_by(post_id=item.item_post_id)]
         for id in candidate_items_id :
             candidate_item = Item.query.filter_by(item_id=id).first()
-            if candidate_item.item_id == item_id :
-                candidate_item.item_status = 3
-            else:
-                candidate_item.item_status = 0
+            candidate_item.item_status = 0
 
-            # Remove candidates of this item from the candidate table
-            Candidate.query.filter_by(post_id=item.item_post_id).delete()
-            # Remove post entry from post table
-            Post.query.filter_by(post_item_id=item.item_id).delete()
-            # Change status of item to 0: no_status
-            item.item_status = 3
-            # Remove post id from item
-            item.item_post_id = None
+        # Remove candidates of this item from the candidate table
+        Candidate.query.filter_by(post_id=item.item_post_id).delete()
+        # Remove post entry from post table
+        Post.query.filter_by(post_item_id=item.item_id).delete()
+        # Change status of item to 0: no_status
+        item.item_status = 0
+        # Remove post id from item
+        item.item_post_id = None
 
-            flash("success")
-            db.session.commit()
+        # Exchange owner id
+        bk_id = item.item_owner_id
+        item.item_owner_id = Item.query.filter_by(item_id=item_id).first().item_owner_id
+        Item.query.filter_by(item_id=item_id).first().item_owner_id = bk_id
+
+        flash("success")
+        db.session.commit()
 
     return redirect(url_for('bag'))
 
