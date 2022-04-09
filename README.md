@@ -4,10 +4,7 @@ The Website for Exchanging Items
 
 ## 專案結構
 
-1. images: 存放所有網頁會用到的圖片檔
-2. scripts: js 檔案
-3. styles: css 檔案
-4. templates: html 檔案
+使用 flask 框架，執行 run.py 即可運行網頁。
 
 ## Git 操作
 
